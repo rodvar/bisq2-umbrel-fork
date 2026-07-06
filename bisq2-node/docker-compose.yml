@@ -1,0 +1,46 @@
+# Umbrel app: Bisq 2 Trusted Node (headless api-app) + QR/status web sidecar.
+#
+# PROXY-RISK VALIDATION. Umbrel injects an `app_proxy` (the authenticated front door)
+# that forwards the app's host port to APP_HOST:APP_PORT. Our `web` sidecar runs
+# `network_mode: "service:server"`, so it has NO network identity of its own — :8091
+# lives inside the `server` container's netns. So we give the STATIC IP to `server`
+# (declared in exports.sh) and point app_proxy at server_IP:8091.
+#
+# Confirming on the appliance:
+#   1. app_proxy reaches server:8091 (sidecar renders through the proxy)
+#   2. the proxy auth gate applies (logged-out access is challenged) — we do NOT set
+#      PROXY_AUTH_ADD, so it defaults ON. That gate IS our security model.
+#   3. the sidecar's version proxy to 127.0.0.1:8090 still works in the shared netns
+#   4. a real device pairs over Tor
+version: "3.7"
+
+services:
+  app_proxy:
+    environment:
+      APP_HOST: $APP_BISQ2_NODE_IP   # server's static IP (see exports.sh)
+      APP_PORT: 8091                         # nginx sidecar, listening inside server's netns
+      # NOTE: PROXY_AUTH_ADD intentionally UNSET → Umbrel auth stays ON. Setting it
+      # "false" (as public apps like mempool do) would expose the pairing secret. Don't.
+
+  server:
+    # Personal namespace for validation (bisq-network package visibility is org-owner
+    # locked). Moves to ghcr.io/bisq-network/... when the org packages go public.
+    image: ghcr.io/rodvar/bisq2-api:2.1.11.1-rc3
+    restart: on-failure
+    stop_grace_period: 1m
+    mem_limit: 2g
+    volumes:
+      - ${APP_DATA_DIR}/data:/data
+    networks:
+      default:
+        ipv4_address: $APP_BISQ2_NODE_IP
+    # No host port publish: app_proxy is the only ingress. The node API binds
+    # 127.0.0.1:8090 (loopback); the sidecar publishes :8091 inside this netns.
+
+  web:
+    # Personal namespace for validation — see note on `server` above.
+    image: ghcr.io/rodvar/bisq2-api-web-ui:2.1.11.1-rc3
+    restart: on-failure
+    network_mode: "service:server"   # share the node's netns -> reach 127.0.0.1:8090 + own :8091
+    volumes:
+      - ${APP_DATA_DIR}/data:/data:ro
