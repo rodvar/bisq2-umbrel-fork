@@ -2,7 +2,7 @@ manifestVersion: 1
 id: bisq2-node
 category: finance
 name: Bisq 2 Node
-version: "2.1.11.1-rc3"
+version: "2.1.11.1-rc5"
 tagline: Self-hosted Bisq 2 node for the Bisq Connect mobile app
 description: >-
   Run your own Bisq 2 node so the Bisq Connect mobile app can connect to a node you
