@@ -26,15 +26,16 @@ port: 8091
 # Community stores don't auto-discover a local icon.svg — the icon must be an absolute
 # URL. We serve our committed bisq2-node/icon.svg via jsDelivr, which (unlike raw GitHub)
 # returns it with an image/svg+xml content-type so umbrelOS renders it.
-# Pinned to a commit SHA (not @main) so jsDelivr's branch cache can't mask a future
-# change — BUMP this SHA whenever you change icon.svg or the gallery jpgs.
-icon: https://cdn.jsdelivr.net/gh/bisq-network/bisq2-umbrel@00498b2ed76efa5676940ae4787d0d08828fcdd0/bisq2-node/icon.svg
+# Served from @main so it always reflects the committed icon.svg once merged. (jsDelivr caches
+# @main up to ~7 days, so an icon change may take a bit to propagate — fine for a rarely-changed icon.)
+icon: https://cdn.jsdelivr.net/gh/bisq-network/bisq2-umbrel@main/bisq2-node/icon.svg
 # Like the icon, gallery entries must be absolute URLs here — umbrelOS did not resolve
 # bare filenames for this community store. Served from the committed jpgs via jsDelivr.
 gallery:
-  - https://cdn.jsdelivr.net/gh/bisq-network/bisq2-umbrel@00498b2ed76efa5676940ae4787d0d08828fcdd0/bisq2-node/1.jpg
-  - https://cdn.jsdelivr.net/gh/bisq-network/bisq2-umbrel@00498b2ed76efa5676940ae4787d0d08828fcdd0/bisq2-node/2.jpg
-  - https://cdn.jsdelivr.net/gh/bisq-network/bisq2-umbrel@00498b2ed76efa5676940ae4787d0d08828fcdd0/bisq2-node/3.jpg
+  - https://cdn.jsdelivr.net/gh/bisq-network/bisq2-umbrel@main/bisq2-node/1.jpg
+  - https://cdn.jsdelivr.net/gh/bisq-network/bisq2-umbrel@main/bisq2-node/2.jpg
+  - https://cdn.jsdelivr.net/gh/bisq-network/bisq2-umbrel@main/bisq2-node/3.jpg
+  - https://cdn.jsdelivr.net/gh/bisq-network/bisq2-umbrel@main/bisq2-node/4.jpg
 path: ""
 defaultUsername: ""
 defaultPassword: ""
