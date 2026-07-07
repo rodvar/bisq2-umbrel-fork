@@ -2,4 +2,4 @@
 # `id` is the unique prefix every app folder/id in this store must start with.
 # So the app lives in ./bisq2-node/ with manifest id "bisq2-node".
 id: bisq2
-name: Bisq 2 (rodvar)
+name: Bisq Network
