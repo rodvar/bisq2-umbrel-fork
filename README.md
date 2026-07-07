@@ -1,51 +1,54 @@
 # Bisq 2 for Umbrel
 
-Umbrel app packaging for [Bisq 2](https://github.com/bisq-network/bisq2) — the
-decentralized, no-KYC peer-to-peer Bitcoin exchange — so you can run it on your
-own [Umbrel](https://umbrel.com) node over Tor.
+A community [Umbrel](https://umbrel.com) app store that packages **Bisq 2 Node** —
+a self-hosted [Bisq 2](https://github.com/bisq-network/bisq2) node for the
+[Bisq Connect](https://github.com/bisq-network/bisq-mobile) mobile app.
 
-> **Status:** early work in progress. Not yet published to the Umbrel App Store
-> and not installable yet — see [Roadmap](#roadmap--open-questions).
+Run your own node so Bisq Connect talks to a node **you** control instead of a
+stranger's — more privacy, no third-party trust. The node is headless and reaches
+the Bisq P2P network over its own bundled Tor; this app gives it a simple browser
+face showing node status and a pairing QR code.
 
-## About Bisq 2
+## Install
 
-Bisq 2 lets you trade Bitcoin peer-to-peer without KYC, accounts, or a trusted
-third party, with all traffic routed over Tor. Its first protocol, **Bisq Easy**,
-is built for newcomers: buy or sell BTC for fiat directly with another person —
-no security deposit, no trading fees — where trust is based on a reputation
-system and each trade is coordinated through built-in, end-to-end encrypted chat.
-Additional protocols (e.g. the trustless MuSig protocol) are planned.
+1. In umbrelOS, open the **App Store**, then the **⋯** menu → **Community App Stores**.
+2. Add this store: `https://github.com/bisq-network/bisq2-umbrel`
+3. Open the **Bisq Network** community store and install **Bisq 2 Node**.
 
-Learn more: [bisq.network](https://bisq.network) · [Bisq 2 wiki](https://bisq.wiki/Bisq_2)
+Submission to the official Umbrel App Store is in progress; until then, the
+community store above is the way to install.
 
-## Installation
+## Pair with Bisq Connect
 
-_Not yet available._ Installation instructions will be added here once the
-packaging is ready (via a community app store, and/or after submission to the
-official Umbrel App Store).
+1. Open the **Bisq 2 Node** app in umbrelOS — it shows node status and a pairing
+   QR code (the node first needs a minute to bootstrap over Tor).
+2. In the [Bisq Connect](https://github.com/bisq-network/bisq-mobile) mobile app,
+   scan the QR code to pair with your node.
 
-## Repository layout (planned)
+> **Security:** the pairing code grants trade control of your node. Umbrel's
+> authenticated app proxy is what protects it — never expose this app to an
+> untrusted network. Your node's identity and data live under the app's data
+> directory and are covered by Umbrel's native backups.
 
-umbrel-app.yml        # Umbrel app manifest (metadata, port, description)
-docker-compose.yml    # Service definition for the Umbrel runtime
-Dockerfile            # Container build for the Bisq 2 node + web access
+## What's inside
 
-## Roadmap / open questions
+| File | Purpose |
+|---|---|
+| `umbrel-app-store.yml` | Community app store root config |
+| `bisq2-node/umbrel-app.yml` | App manifest (metadata, port `8091`, gallery, icon) |
+| `bisq2-node/docker-compose.yml` | The headless node + a small web UI sidecar for the QR page |
 
-Umbrel apps must open to a browser-accessible UI. Bisq 2 ships as a JavaFX
-desktop app and has no official headless web UI (that effort was discontinued in
-Dec 2025), so packaging depends on one of:
-
-- exposing the Bisq 2 `http-api` behind a web frontend, or
-- wrapping the desktop app in a web-desktop (noVNC/KasmVNC) container.
-
-Remote access and authentication should reuse Bisq 2's secure device-pairing work
-where possible.
+The images (`ghcr.io/bisq-network/bisq2-api` and `…/bisq2-api-web-ui`) are built
+multi-arch (amd64 + arm64) from [bisq-network/bisq2](https://github.com/bisq-network/bisq2)
+and digest-pinned here. They're released automatically from the
+[bisq-network/bisq-mobile](https://github.com/bisq-network/bisq-mobile) CI, which
+opens the version-bump PRs against this store.
 
 ## Contributing
 
-Issues and PRs welcome. Please keep changes focused on the Umbrel packaging —
-Bisq 2 itself lives in [bisq-network/bisq2](https://github.com/bisq-network/bisq2).
+Issues and PRs welcome — please keep changes focused on the Umbrel packaging.
+Bisq 2 itself lives in [bisq-network/bisq2](https://github.com/bisq-network/bisq2),
+and the mobile client in [bisq-network/bisq-mobile](https://github.com/bisq-network/bisq-mobile).
 
 ## License
 

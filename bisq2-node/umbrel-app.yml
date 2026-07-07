@@ -20,26 +20,28 @@ description: >-
 developer: Bisq
 website: https://bisq.network
 dependencies: []
-repo: https://github.com/rodvar/bisq2-umbrel
+repo: https://github.com/bisq-network/bisq2-umbrel
 support: https://github.com/bisq-network/bisq-mobile/issues
 port: 8091
 # Community stores don't auto-discover a local icon.svg — the icon must be an absolute
 # URL. We serve our committed bisq2-node/icon.svg via jsDelivr, which (unlike raw GitHub)
 # returns it with an image/svg+xml content-type so umbrelOS renders it.
-# Pinned to a commit SHA (not @main) so jsDelivr's branch cache can't mask a future
-# change — BUMP this SHA whenever you change icon.svg or the gallery jpgs.
-icon: https://cdn.jsdelivr.net/gh/rodvar/bisq2-umbrel@b2b1db3d39eda724f97341f84fbedb994a4e7ab3/bisq2-node/icon.svg
+# Served from @main so it always reflects the committed icon.svg once merged. (jsDelivr caches
+# @main up to ~7 days, so an icon change may take a bit to propagate — fine for a rarely-changed icon.)
+icon: https://cdn.jsdelivr.net/gh/bisq-network/bisq2-umbrel@main/bisq2-node/icon.svg
 # Like the icon, gallery entries must be absolute URLs here — umbrelOS did not resolve
 # bare filenames for this community store. Served from the committed jpgs via jsDelivr.
 gallery:
-  - https://cdn.jsdelivr.net/gh/rodvar/bisq2-umbrel@b2b1db3d39eda724f97341f84fbedb994a4e7ab3/bisq2-node/1.jpg
-  - https://cdn.jsdelivr.net/gh/rodvar/bisq2-umbrel@b2b1db3d39eda724f97341f84fbedb994a4e7ab3/bisq2-node/2.jpg
-  - https://cdn.jsdelivr.net/gh/rodvar/bisq2-umbrel@b2b1db3d39eda724f97341f84fbedb994a4e7ab3/bisq2-node/3.jpg
+  - https://cdn.jsdelivr.net/gh/bisq-network/bisq2-umbrel@main/bisq2-node/1.jpg
+  - https://cdn.jsdelivr.net/gh/bisq-network/bisq2-umbrel@main/bisq2-node/2.jpg
+  - https://cdn.jsdelivr.net/gh/bisq-network/bisq2-umbrel@main/bisq2-node/3.jpg
+  - https://cdn.jsdelivr.net/gh/bisq-network/bisq2-umbrel@main/bisq2-node/4.jpg
 path: ""
 defaultUsername: ""
 defaultPassword: ""
-# TODO: set to the real onion/version once the bundled Tor publishes; cosmetic.
 submitter: rodvar
 submission: ""
 releaseNotes: >-
-  Interim release candidate for community-store validation.
+  First public release of the Bisq 2 Node for Umbrel: run your own headless Bisq 2
+  node over its bundled Tor and pair it to the Bisq Connect mobile app by scanning the
+  QR code shown in the app's browser UI.
