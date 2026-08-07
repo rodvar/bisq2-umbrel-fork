@@ -25,7 +25,7 @@ services:
   server:
     # Personal namespace for validation (bisq-network package visibility is org-owner
     # locked). Moves to ghcr.io/bisq-network/... when the org packages go public.
-    image: ghcr.io/bisq-network/bisq2-api@sha256:af77443abc90114b0282d44a1fa5b5f3beeb608b6df76d8674f4366236856154
+    image: ghcr.io/bisq-network/bisq2-api@sha256:3dd9152da26fa6d409707e16b4e0a5725ed95e59383de02a1f5778ec75d69306
     restart: on-failure
     stop_grace_period: 1m
     mem_limit: 2g
@@ -39,7 +39,7 @@ services:
 
   web:
     # Personal namespace for validation — see note on `server` above.
-    image: ghcr.io/bisq-network/bisq2-api-web-ui@sha256:0295d45b6dafb3d9bf0d2e6ba74caeb42222e00eb30d9fa847a136a0f358aa23
+    image: ghcr.io/bisq-network/bisq2-api-web-ui@sha256:86b93c3b99661bed88011842b2e02504147546687af62b86fdd0a4a5e937add4
     restart: on-failure
     network_mode: "service:server"   # share the node's netns -> reach 127.0.0.1:8090 + own :8091
     volumes:
