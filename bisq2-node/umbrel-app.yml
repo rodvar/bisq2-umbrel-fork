@@ -2,7 +2,7 @@ manifestVersion: 1
 id: bisq2-node
 category: finance
 name: Bisq 2 Node
-version: "2.1.11.2"
+version: "2.1.12.0"
 tagline: Self-hosted Bisq 2 node for the Bisq Connect mobile app
 description: >-
   Run your own Bisq 2 node so the Bisq Connect mobile app can connect to a node you
@@ -41,4 +41,4 @@ defaultUsername: ""
 defaultPassword: ""
 submitter: rodvar
 submission: ""
-releaseNotes: "Maintenance update with the latest Bisq 2 upstream fixes and improvements (Bisq 2 API 2.1.11, bisq2 @ 9322011). Full changes: https://github.com/bisq-network/bisq2/compare/285cf42...9322011"
+releaseNotes: "Maintenance update with the latest Bisq 2 upstream fixes and improvements (Bisq 2 API 2.1.12, bisq2 @ a1f8db1). Full changes: https://github.com/bisq-network/bisq2/compare/9322011...a1f8db1"
